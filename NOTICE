@@ -1,0 +1,13 @@
+The generated file python/mojo_phonenumbers/_metadata.py contains numbering
+plan metadata derived from python-phonenumbers 9.0.35, which is a Python port
+of Google's libphonenumber project.
+
+python-phonenumbers:
+  Copyright 2011-2026 David Drysdale and contributors
+  Licensed under the Apache License, Version 2.0
+  https://github.com/daviddrysdale/python-phonenumbers
+
+libphonenumber:
+  Copyright 2011 The Libphonenumber Authors
+  Licensed under the Apache License, Version 2.0
+  https://github.com/google/libphonenumber
