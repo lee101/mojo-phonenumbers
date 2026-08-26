@@ -85,16 +85,20 @@ caches are warm after benchmark setup.
 
 | workload | mojo-phonenumbers | phonenumbers 9.0.35 | relative |
 | --- | ---: | ---: | ---: |
-| parse 100,000 mixed inputs | 131.17 ms | 3166.80 ms | 24.14x |
-| validate 500,000 numbers | 219.11 ms | 9195.38 ms | 41.97x |
-| format 250,000 numbers | 118.89 ms | 2262.45 ms | 19.03x |
-| normalize 5.25M characters | 9.63 ms | 1033.73 ms | 107.39x |
+| parse 100,000 mixed inputs | 148.56 ms | 2855.04 ms | 19.22x |
+| validate 500,000 numbers | 228.60 ms | 6716.02 ms | 29.38x |
+| format 250,000 numbers | 117.47 ms | 2091.93 ms | 17.81x |
+| normalize 5.25M characters | 10.34 ms | 1056.18 ms | 102.16x |
 
 These are end-to-end Python API timings, including ctypes overhead. The largest
 gains come from bounded reuse of parsed and formatted results and the SIMD
 character scan. Python holds the input and output buffers alive for each
 synchronous FFI call, and tiny immutable metadata arrays are reused rather than
 allocated for every call.
+
+Profiling found no kernel at parity with or slower than upstream: every measured
+workload is more than 17x faster. No additional optimization was applied to
+these already-ahead paths.
 
 There is no GPU path. These workloads are byte filtering, short regex matching,
 and small metadata lookups; transfer and launch overhead are a poor fit. They
