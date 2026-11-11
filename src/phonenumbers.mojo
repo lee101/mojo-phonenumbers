@@ -43,7 +43,7 @@ def mpn_normalize(
         comptime W = simd_width_of[DType.uint8]()
         var i = 0
         while i + W <= n:
-            var chars = src.load[width=W](i)
+            var chars = src.unsafe_load[width=W](i)
             var digits = chars.ge(UInt8(48)) & chars.le(UInt8(57))
             if digits.reduce_and():
                 dst.store(written, chars)
